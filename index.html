@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>○○의원 | 오늘 진료 안내</title>
+  <meta name="description" content="오늘 진료 여부, 접수 마감, 공지, 예약 링크를 한 번에 확인하세요." />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <header class="wrap header">
+    <div>
+      <div class="badge">대치동 병원용 · 한눈 페이지</div>
+      <h1>○○의원 <span class="muted">오늘 진료 안내</span></h1>
+      <p class="sub">전화하기 전에 여기에서 먼저 확인해주세요.</p>
+    </div>
+    <div class="right">
+      <a class="btn" href="#reserve">예약 바로가기</a>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <!-- 오늘 상태 -->
+    <section class="card">
+      <h2>✅ 오늘 진료 가능 여부</h2>
+      <div class="status-row">
+        <div id="statusPill" class="pill open">진료 중 (접수 가능)</div>
+        <div class="meta">접수 마감: <strong id="cutoffText">17:30</strong></div>
+      </div>
+      <p class="hint" id="statusHint">대기시간이 길 수 있어요. 여유 있게 방문해주세요.</p>
+
+      <details class="staff" id="staffPanel">
+        <summary>직원용 · 오늘 상태 수정 (비공개)</summary>
+        <div class="staff-grid">
+          <label>
+            오늘 상태
+            <select id="statusSelect">
+              <option value="open" selected>진료 중 (접수 가능)</option>
+              <option value="closing">곧 접수 마감</option>
+              <option value="closed">오늘 접수 마감</option>
+              <option value="holiday">휴진</option>
+            </select>
+          </label>
+
+          <label>
+            접수 마감 (24시간 HH:MM)
+            <input id="cutoffInput" type="time" value="17:30" />
+          </label>
+
+          <label class="span2">
+            안내 문구 (한 줄)
+            <input id="hintInput" type="text" value="대기시간이 길 수 있어요. 여유 있게 방문해주세요." />
+          </label>
+
+          <button class="btn primary span2" id="applyBtn" type="button">적용하기</button>
+          <p class="tiny span2">
+            * 이 수정은 “현재 기기에서만” 저장돼요(데모용). 실제 운영은 노션/간단 관리자 페이지로 바꿔드리면 됨.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <!-- 진료 시간 -->
+    <section class="card">
+      <h2>⏰ 진료 시간</h2>
+      <ul class="list">
+        <li><span>평일</span><strong>09:30 ~ 18:30</strong></li>
+        <li><span>점심시간</span><strong>13:00 ~ 14:00</strong></li>
+        <li><span>토요일</span><strong>09:30 ~ 13:00</strong></li>
+        <li><span>일요일/공휴일</span><strong>휴진</strong></li>
+      </ul>
+      <p class="tiny">※ 실제 운영 시간에 맞게 바꿔서 사용하세요.</p>
+    </section>
+
+    <!-- 공지 -->
+    <section class="card">
+      <h2>📢 오늘의 공지</h2>
+      <ul class="bullets" id="noticeList">
+        <li>오늘은 검사 예약 환자 우선 진료입니다.</li>
+        <li>원장님 오후 4시~5시 외부 일정으로 대기시간이 길어질 수 있습니다.</li>
+      </ul>
+      <p class="tiny">공지는 “짧고 명확하게”가 제일 효과 좋아요.</p>
+    </section>
+
+    <!-- 준비사항 -->
+    <section class="card">
+      <h2>📝 예약·진료 전 확인</h2>
+      <ul class="bullets">
+        <li>초진 환자는 <strong>신분증</strong>을 지참해주세요.</li>
+        <li>검사 예약 환자는 <strong>금식 여부</strong> 문자 안내를 확인해주세요.</li>
+        <li>대기시간이 길 경우 <strong>재방문 안내</strong>를 드릴 수 있습니다.</li>
+      </ul>
+    </section>
+
+    <!-- 예약 -->
+    <section class="card span2" id="reserve">
+      <h2>📍 예약 바로가기</h2>
+      <p class="sub">기존 네이버예약/카카오채널 링크를 그대로 연결하면 됩니다.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="https://booking.naver.com/" target="_blank" rel="noopener noreferrer">
+          네이버 예약으로 이동
+        </a>
+        <a class="btn" href="https://pf.kakao.com/" target="_blank" rel="noopener noreferrer">
+          카카오채널로 문의
+        </a>
+        <a class="btn" href="tel:0212345678">
+          전화 걸기
+        </a>
+      </div>
+      <p class="tiny">* 위 링크/전화번호는 샘플이야. 병원 실제 링크로 바꾸면 끝.</p>
+    </section>
+
+    <!-- 전화 전에 -->
+    <section class="card span2 soft">
+      <h2>📞 전화 문의 전에</h2>
+      <p class="sub">
+        아래 질문은 이 페이지에서 바로 확인 가능합니다.
+      </p>
+      <div class="chips">
+        <span class="chip">오늘 진료 되나요?</span>
+        <span class="chip">몇 시까지 접수해요?</span>
+        <span class="chip">점심시간 있어요?</span>
+        <span class="chip">토요일 진료하나요?</span>
+      </div>
+      <p class="tiny">전화 연결이 어려울 수 있는 점 양해 부탁드립니다.</p>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <span class="tiny">© ○○의원 · 안내 페이지 (데모)</span>
+    <button class="link" id="toggleStaff" type="button">직원용 패널 열기/닫기</button>
+  </footer>
+
+  <script>
+    const statusPill = document.getElementById('statusPill');
+    const cutoffText = document.getElementById('cutoffText');
+    const statusHint = document.getElementById('statusHint');
+
+    const statusSelect = document.getElementById('statusSelect');
+    const cutoffInput = document.getElementById('cutoffInput');
+    const hintInput = document.getElementById('hintInput');
+    const applyBtn = document.getElementById('applyBtn');
+
+    const staffPanel = document.getElementById('staffPanel');
+    const toggleStaff = document.getElementById('toggleStaff');
+
+    const statusMap = {
+      open:   { text: '진료 중 (접수 가능)', cls: 'open' },
+      closing:{ text: '곧 접수 마감',        cls: 'closing' },
+      closed: { text: '오늘 접수 마감',      cls: 'closed' },
+      holiday:{ text: '휴진',                cls: 'holiday' }
+    };
+
+    function apply() {
+      const v = statusSelect.value;
+      const m = statusMap[v];
+      statusPill.textContent = m.text;
+      statusPill.className = `pill ${m.cls}`;
+
+      cutoffText.textContent = cutoffInput.value || '—';
+      statusHint.textContent = hintInput.value || '';
+
+      // 데모: 로컬 저장
+      localStorage.setItem('clinic_status', v);
+      localStorage.setItem('clinic_cutoff', cutoffInput.value || '');
+      localStorage.setItem('clinic_hint', hintInput.value || '');
+    }
+
+    function load() {
+      const v = localStorage.getItem('clinic_status');
+      const c = localStorage.getItem('clinic_cutoff');
+      const h = localStorage.getItem('clinic_hint');
+
+      if (v && statusMap[v]) statusSelect.value = v;
+      if (c) cutoffInput.value = c;
+      if (h) hintInput.value = h;
+
+      apply();
+    }
+
+    applyBtn.addEventListener('click', apply);
+    toggleStaff.addEventListener('click', () => {
+      staffPanel.open = !staffPanel.open;
+      staffPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    load();
+  </script>
+</body>
+</html>
